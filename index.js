@@ -21,8 +21,9 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/views/ws.html');
 });
 
-app.get('/complete.unity3d', function (req, res) {
-    res.sendFile(__dirname + '/files/complete.unity3d');
+app.get('/component05a.unity3d', function (req, res) {
+    console.log("sending file component05a.unity3d...");
+    res.sendFile(__dirname + '/files/component05a.unity3d');
 });
 
 app.get('/GETcomponent_random', function (req, res) {
@@ -37,7 +38,9 @@ app.get('/prova', function(req, res) {
 
 app.post('/send_component', function (req, res) {
     //req.body.inputText; //websocket
-    array[0].send(req.body.inputText);
+    array.forEach(function(connection){
+        connection.send(req.body.inputText);
+    });
 });
 
 app.post('/POSTcomponent_random', function (req, res) {
@@ -55,8 +58,6 @@ wss.on('connection', function(connection) {
 
     connection.send(`connesso`);
     array.push(connection);
-    console.log(array);
-
 });
 
 
