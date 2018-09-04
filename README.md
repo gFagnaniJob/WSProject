@@ -7,7 +7,7 @@ Source and Inspiration for this project: wahengchang/nodejs-websocket-example
     git clone https://github.com/gFagnaniJob/WSProject.git
     cd WSProject
     npm install
-    node index.js
+    npm run start
 
 Open Browser on:
     http://localhost:3000/
