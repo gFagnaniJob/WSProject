@@ -13,24 +13,28 @@ app.use(bodyParser.json())
 
 
 var components = ["component00","component01","component02a","component02b","component02c",
-"component02d","component03a","component03b","component04a","component04b","component05a", "component05b","complete"];
+"component02d","component03a","component03b","component04a","component04b","component05a", "component05b"];
 
 /*************** GETS ****************/
 
 app.get('/', function (req, res) {
+    console.log(".... get / ....")
     res.sendFile(__dirname + '/views/ws.html');
 });
 
-app.get('/component05a.unity3d', function (req, res) {
-    console.log("sending file component05a.unity3d...");
-    res.sendFile(__dirname + '/files/component05a.unity3d');
+app.get('/complete.unity3d', function (req, res) {
+    console.log("sending file.... complete.unity3d....");
+    res.sendFile(__dirname + '/files/complete.unity3d');
 });
 
 app.get('/GETcomponent_random', function (req, res) {
-    res.send(components[(Math.floor(Math.random()*13))]);
+    var component = components[(Math.floor(Math.random()*12))];
+    console.log(".... get /GETcomponent_random ...." + component + "....");
+    res.send(component);
 });
 
 app.get('/prova', function(req, res) {
+    console.log(".... get /prova ....")
     res.sendFile(__dirname + '/views/prova.html');
 })
 
@@ -38,13 +42,17 @@ app.get('/prova', function(req, res) {
 
 app.post('/send_component', function (req, res) {
     //req.body.inputText; //websocket
+    console.log(".... post /send_component " + req.body.components + "....")
     array.forEach(function(connection){
-        connection.send(req.body.inputText);
+        connection.send(req.body.components);
     });
 });
 
 app.post('/POSTcomponent_random', function (req, res) {
-    res.send(components[(Math.floor(Math.random()*13))]);
+    var component = components[(Math.floor(Math.random()*12))];
+    console.log(".... post /POSTcomponent_random ...." + component + "....");
+    console.log("req.body = " + req.body.voto);
+    res.send(component);
 });
 var array = [];
 
@@ -56,7 +64,7 @@ wss.on('connection', function(connection) {
         console.log("received: %s", message);
     });
 
-    connection.send(`connesso`);
+    //connection.send(`connesso`);
     array.push(connection);
 });
 

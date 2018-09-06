@@ -7,6 +7,33 @@
 </p>
 
 <form action="/send_component" method="POST">
-<input type="text" name="inputText" id="inputText">
+    <select name="components">
+        <option value="component00">component00</option>
+        <option value="component01">component01</option>
+        <option value="component02a">component02a</option>
+        <option value="component02b">component02b</option>
+        <option value="component02c">component02c</option>
+        <option value="component02d">component02d</option>
+        <option value="component03a">component03a</option>
+        <option value="component03b">component03b</option>
+        <option value="component04a">component04a</option>
+        <option value="component04b">component04b</option>
+        <option value="component05a">component05a</option>
+        <option value="component05b">component05b</option>
+        <option value="none">none</option>
+      </select>
 <button>invia</button>
 </form>
+<script>
+    var ws = new WebSocket('ws://192.168.0.231:40510');
+
+    ws.onopen = function() {
+        console.log('websocket is connected...');
+
+        ws.send('connesso');
+    }
+
+    ws.onmessage = function (ev) {
+        console.log(ev);
+    }
+</script>
